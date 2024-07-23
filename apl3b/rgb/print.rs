@@ -5,7 +5,7 @@ struct RGB(u8,u8,u8);
 
 impl fmt::Display for RGB {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "0x{:0>2X}{:0>2X}{:0>2X}", self.0, self.1, self.2)
+        write!(f, "({red}, {green}, {blue}) 0x{red:0>2X}{green:0>2X}{blue:0>2X}", red=self.0, green=self.1, blue=self.2)
     }
 }
 
