@@ -38,5 +38,5 @@ fn main() {
         }
     }
 
-    println!("The valut that occurs more often: {}", max.1);
+    println!("The value that occurs more often: {}", max.1);
 }
