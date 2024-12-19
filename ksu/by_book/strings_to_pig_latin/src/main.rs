@@ -3,6 +3,8 @@ use std::io;
 fn main() {
     println!("Give me a word and I will convert it to pig latin!");
     println!("Type QUIT to finish.");
+    let vowels = ['a', 'e', 'i', 'o', 'u'];
+
     loop {
         let mut word = String::new();
         io::stdin()
@@ -15,7 +17,6 @@ fn main() {
             break;
         }
 
-        let vowels = ['a', 'e', 'i', 'o', 'u'];
         if let Some(first) = word.chars().next() {
             if !first.is_alphabetic() {
                 println!("Should start with a letter!");
