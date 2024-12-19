@@ -17,9 +17,15 @@ fn main() {
             break;
         }
 
+        if word.len() == 1 {
+            println!("Enter a bigger word!");
+            continue;
+        }
+
         if let Some(first) = word.chars().next() {
             if !first.is_alphabetic() {
                 println!("Should start with a letter!");
+                continue;
             }
 
             if vowels.contains(&first) {
