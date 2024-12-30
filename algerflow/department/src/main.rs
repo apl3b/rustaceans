@@ -1,13 +1,9 @@
 use std::collections::HashMap;
 use std::io;
 
+use department::Department;
+
 fn main() {
-    let mut departments: Vec<String> = Vec::new();
-
-    departments.push(String::from("Engineering"));
-    departments.push(String::from("Sales"));
-    departments.push(String::from("Purpose"));
-
     let mut people_in_departments: HashMap<String, Vec<String>> = HashMap::new();
 
     loop {
@@ -37,7 +33,7 @@ fn main() {
 
         match option {
             1 => {
-                println!("Existing departments: {:?}.", departments);
+                Department::print_valid_departments();
                 println!(
                     "To add a person to a department use this syntax: Add <Name> to <Department>."
                 );
@@ -53,13 +49,8 @@ fn main() {
 
                 let name = words.get(1).expect("An error during name retrieval.");
                 let department = words.get(3).expect("An error during department retrieval.");
-
-                assert!(
-                    departments.contains(&String::from(*department)),
-                    "This department does not exist!"
-                );
-
-                let people = people_in_departments.get_mut(&String::from(*department));
+                let department = Department::new(String::from(*department));
+                let people = people_in_departments.get_mut(department.value());
                 match people {
                     Some(people) => {
                         people.push(String::from(*name));
@@ -67,14 +58,14 @@ fn main() {
                     None => {
                         let mut people: Vec<String> = Vec::new();
                         people.push(String::from(*name));
-                        people_in_departments.insert(String::from(*department), people);
+                        people_in_departments.insert(department.value().clone(), people);
                     }
                 }
 
                 println!("Added!");
             }
             2 => {
-                println!("Existing departments: {:?}.", departments);
+                Department::print_valid_departments();
                 println!("Specify department:");
                 let mut department = String::new();
                 io::stdin()
@@ -82,12 +73,9 @@ fn main() {
                     .expect("Error while reading input.");
 
                 let department = String::from(department.trim());
-                assert!(
-                    departments.contains(&department),
-                    "This department does not exist!"
-                );
+                let department = Department::new(department);
 
-                let people = people_in_departments.get(&department);
+                let people = people_in_departments.get(department.value());
                 match people {
                     Some(people) => println!("People of department: {:?}", people),
                     None => println!("Department has no one!"),
