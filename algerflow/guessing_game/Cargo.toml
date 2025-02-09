@@ -1,6 +1,6 @@
 [package]
 name = "algerflow_guessing_game"
-licence = "MIT"
+license = "MIT"
 description = "A fun game where you guess what number the computer has chosen."
 version = "0.1.0"
 edition = "2021"
